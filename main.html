@@ -66,6 +66,7 @@
                 </div>
                 <button type="button" class="btn btn-primary mt-3 mb-3 w-100" data-bs-toggle="modal" data-bs-target="#bonus_modal">ボーナス登録</button>
                 <button type="button" class="btn btn-primary mt-3 mb-3 w-100 js_check_cookie">Cookieチェック</button>
+                <button type="button" class="btn btn-primary mt-3 mb-3 w-100 js_del_cookie">Cookie削除</button>
             </main>
 
             <footer class="mt-auto text-white-50">
@@ -220,6 +221,10 @@
             $(".js_check_cookie").on("click", function(){
                 let bonus_obj = JSON.parse($.cookie('bonus_data'));
                 alert(JSON.stringify(bonus_obj));
+            });
+
+            $(".js_del_cookie").on("click", function(){
+                $.removeCookie('bonus_data', {path:'/'});
             });
 
         </script>

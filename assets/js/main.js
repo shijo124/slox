@@ -47,7 +47,6 @@ function bonus_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind){
         "cherry_cnt":parseInt(cherry_cnt),
         "bonus_kind":bonus_kind,
     }
-    console.log(chart_json);
     bonus_data.unshift(chart_json);
     com_set_cookie('bonus_data', JSON.stringify(bonus_data));
 

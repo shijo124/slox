@@ -1,6 +1,7 @@
 'use strict';
 
-const com_domain = 'shijo124.github.io';
+// const com_domain = 'shijo124.github.io';
+const com_domain = '192.168.56.108';
 
 //
 // cookie set

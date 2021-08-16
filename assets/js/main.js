@@ -1,5 +1,10 @@
 'use strict';
 
+const TANDOKU_BIG = 'tan_big';
+const TANDOKU_REG = 'tan_reg';
+const CHERRY_BIG = 'che_big';
+const CHERRY_REG = 'che_reg';
+
 const bonus_chart_color = {
     "tan_big":"rgba(255,0,0,0.5)",
     "tan_reg":"rgba(0,255,0,0.5)",
@@ -100,4 +105,107 @@ function update_bonus_chart(ctx,myChart){
         myChart.update();
 
     }
+}
+
+//
+// bonus_rate
+//
+function bonus_rate_update(){
+    if (typeof $.cookie('bonus_data') !== 'undefined'){
+        let bonus_data = JSON.parse(com_get_cookie('bonus_data'));
+        let bonus_rate = {
+            total_cnt:0,
+            total_calc:0,
+            total_big:0,
+            total_big_rate:0.0,
+            total_reg:0,
+            total_reg_rate:0.0,
+            total_budo:0,
+            total_budo_rate:0.0,
+            total_cherry:0,
+            total_cherry_rate:0.0,
+            tandoku_big:0,
+            tandoku_big_rate:0.0,
+            tandoku_reg:0,
+            tandoku_reg_rate:0.0,
+            cherry_big:0,
+            cherry_big_rate:0.0,
+            cherry_reg:0,
+            cherry_reg_rate:0.0,
+        }
+
+        for(let i=0;i<bonus_data.length;i++){
+            bonus_rate.total_cnt += parseInt(bonus_data[i]['all_cnt']);
+            bonus_rate.total_budo += parseInt(bonus_data[i]['budo_cnt']);
+            bonus_rate.total_cherry += parseInt(bonus_data[i]['cherry_cnt']);
+            if(bonus_data[i]['bonus_kind'] === TANDOKU_BIG){
+                bonus_rate.total_big += 1;
+                bonus_rate.tandoku_big += 1;
+            } else if(bonus_data[i]['bonus_kind'] === TANDOKU_REG) {
+                bonus_rate.total_reg += 1;
+                bonus_rate.tandoku_reg += 1;
+            } else if(bonus_data[i]['bonus_kind'] === CHERRY_BIG) {
+                bonus_rate.total_big += 1;
+                bonus_rate.cherry_big += 1;
+            } else if(bonus_data[i]['bonus_kind'] === CHERRY_REG) {
+                bonus_rate.total_reg += 1;
+                bonus_rate.cherry_reg += 1;
+            } else {
+                return false;
+            }
+        }
+
+        // TOTAL CALC
+        bonus_rate.total_calc = Math.ceil(bonus_rate.total_cnt / (bonus_rate.total_big + bonus_rate.total_reg));
+        // BIG
+        bonus_rate.total_big_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.total_big);
+        // REG
+        bonus_rate.total_reg_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.total_reg);
+        // BUDO 小数点第2位
+        bonus_rate.total_budo_rate = Math.ceil((bonus_rate.total_cnt / bonus_rate.total_budo) * 100) / 100;
+        // CHERRY 小数点第2位
+        bonus_rate.total_cherry_rate = Math.ceil((bonus_rate.total_cnt / bonus_rate.total_cherry) * 100) / 100;
+        // TANDOKU BIG
+        bonus_rate.tandoku_big_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.tandoku_big);
+        // TANDOKU REG
+        bonus_rate.tandoku_reg_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.tandoku_reg);
+        // CHERRY BIG
+        bonus_rate.cherry_big_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.cherry_big);
+        // CHERRY REG
+        bonus_rate.cherry_reg_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.cherry_reg);
+
+        $('.js_total_cnt').html(String(bonus_rate.total_cnt) + " 回");
+        $('.js_total_calc').html("(1/" + String(bonus_rate.total_calc) + ")");
+        $('.js_total_big').html(String(bonus_rate.total_big) + " 回");
+        $('.js_total_big_rate').html("(1/" + String(bonus_rate.total_big_rate) + ")");
+        $('.js_total_reg').html(String(bonus_rate.total_reg) + " 回");
+        $('.js_total_reg_rate').html("(1/" + String(bonus_rate.total_reg_rate) + ")");
+        $('.js_total_budo').html(String(bonus_rate.total_budo) + " 回");
+        $('.js_total_budo_rate').html("(1/" + String(bonus_rate.total_budo_rate) + ")");
+        $('.js_total_cherry').html(String(bonus_rate.total_cherry) + " 回");
+        $('.js_total_cherry_rate').html("(1/" + String(bonus_rate.total_cherry_rate) + ")");
+        $('.js_tandoku_big').html(String(bonus_rate.tandoku_big) + " 回");
+        $('.js_tandoku_big_rate').html("(1/" + String(bonus_rate.tandoku_big_rate) + ")");
+        $('.js_tandoku_reg').html(String(bonus_rate.tandoku_reg) + " 回");
+        $('.js_tandoku_reg_rate').html("(1/" + String(bonus_rate.tandoku_reg_rate) + ")");
+        $('.js_cherry_big').html(String(bonus_rate.cherry_big) + " 回");
+        $('.js_cherry_big_rate').html("(1/" + String(bonus_rate.cherry_big_rate) + ")");
+        $('.js_cherry_reg').html(String(bonus_rate.cherry_reg) + " 回");
+        $('.js_cherry_reg_rate').html("(1/" + String(bonus_rate.cherry_reg_rate) + ")");
+
+        console.log(bonus_rate);
+    }
+}
+
+//
+// DEBUG
+//
+function debug(){
+    bonus_rate_update();
+    let bonus_obj = JSON.parse($.cookie('bonus_data'));
+    alert(JSON.stringify(bonus_obj));
+}
+
+function cookie_del(){
+    $.removeCookie('bonus_data', {path:'/'});
 }

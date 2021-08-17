@@ -156,44 +156,111 @@ function bonus_rate_update(){
         }
 
         // TOTAL CALC
-        bonus_rate.total_calc = Math.ceil(bonus_rate.total_cnt / (bonus_rate.total_big + bonus_rate.total_reg));
+        if((bonus_rate.total_big + bonus_rate.total_reg) > 0){
+            bonus_rate.total_calc = Math.ceil(bonus_rate.total_cnt / (bonus_rate.total_big + bonus_rate.total_reg));
+        } else {
+            bonus_rate.total_calc = 0;
+        }
         // BIG
-        bonus_rate.total_big_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.total_big);
+        if(bonus_rate.total_big > 0){
+            bonus_rate.total_big_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.total_big);
+        } else {
+            bonus_rate.total_big_rate = 0;
+        }
         // REG
-        bonus_rate.total_reg_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.total_reg);
+        if(bonus_rate.total_reg > 0){
+            bonus_rate.total_reg_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.total_reg);
+        } else {
+            bonus_rate.total_reg_rate = 0;
+        }
         // BUDO 小数点第2位
-        bonus_rate.total_budo_rate = Math.ceil((bonus_rate.total_cnt / bonus_rate.total_budo) * 100) / 100;
+        if(bonus_rate.total_budo > 0){
+            bonus_rate.total_budo_rate = Math.ceil((bonus_rate.total_cnt / bonus_rate.total_budo) * 100) / 100;
+        } else {
+            bonus_rate.total_budo_rate = 0;
+        }
         // CHERRY 小数点第2位
-        bonus_rate.total_cherry_rate = Math.ceil((bonus_rate.total_cnt / bonus_rate.total_cherry) * 100) / 100;
+        if(bonus_rate.total_cherry > 0){
+            bonus_rate.total_cherry_rate = Math.ceil((bonus_rate.total_cnt / bonus_rate.total_cherry) * 100) / 100;
+        } else {
+            bonus_rate.total_cherry_rate = 0;
+        }
         // TANDOKU BIG
-        bonus_rate.tandoku_big_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.tandoku_big);
+        if(bonus_rate.tandoku_big > 0){
+            bonus_rate.tandoku_big_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.tandoku_big);
+        } else {
+            bonus_rate.tandoku_big_rate = 0;
+        }
         // TANDOKU REG
-        bonus_rate.tandoku_reg_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.tandoku_reg);
+        if(bonus_rate.tandoku_reg > 0){
+            bonus_rate.tandoku_reg_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.tandoku_reg);
+        } else {
+            bonus_rate.tandoku_reg_rate = 0;
+        }
         // CHERRY BIG
-        bonus_rate.cherry_big_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.cherry_big);
+        if(bonus_rate.cherry_big > 0){
+            bonus_rate.cherry_big_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.cherry_big);
+        } else {
+            bonus_rate.cherry_big_rate = 0;
+        }
         // CHERRY REG
-        bonus_rate.cherry_reg_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.cherry_reg);
+        if(bonus_rate.cherry_reg > 0){
+            bonus_rate.cherry_reg_rate = Math.ceil(bonus_rate.total_cnt / bonus_rate.cherry_reg);
+        } else {
+            bonus_rate.cherry_reg_rate = 0;
+        }
 
         $('.js_total_cnt').html(String(bonus_rate.total_cnt) + " 回");
         $('.js_total_calc').html("(1/" + String(bonus_rate.total_calc) + ")");
         $('.js_total_big').html(String(bonus_rate.total_big) + " 回");
-        $('.js_total_big_rate').html("(1/" + String(bonus_rate.total_big_rate) + ")");
+        if(bonus_rate.total_big_rate > 0){
+            $('.js_total_big_rate').html("(1/" + String(bonus_rate.total_big_rate) + ")");
+        } else {
+            $('.js_total_big_rate').html("(-/-)");
+        }
         $('.js_total_reg').html(String(bonus_rate.total_reg) + " 回");
-        $('.js_total_reg_rate').html("(1/" + String(bonus_rate.total_reg_rate) + ")");
+        if(bonus_rate.total_reg_rate > 0){
+            $('.js_total_reg_rate').html("(1/" + String(bonus_rate.total_reg_rate) + ")");
+        } else {
+            $('.js_total_reg_rate').html("(-/-)");
+        }
         $('.js_total_budo').html(String(bonus_rate.total_budo) + " 回");
-        $('.js_total_budo_rate').html("(1/" + String(bonus_rate.total_budo_rate) + ")");
+        if(bonus_rate.total_budo_rate > 0){
+            $('.js_total_budo_rate').html("(1/" + String(bonus_rate.total_budo_rate) + ")");
+        } else {
+            $('.js_total_budo_rate').html("(-/-)");
+        }
         $('.js_total_cherry').html(String(bonus_rate.total_cherry) + " 回");
-        $('.js_total_cherry_rate').html("(1/" + String(bonus_rate.total_cherry_rate) + ")");
+        if(bonus_rate.total_cherry_rate > 0){
+            $('.js_total_cherry_rate').html("(1/" + String(bonus_rate.total_cherry_rate) + ")");
+        } else {
+            $('.js_total_cherry_rate').html("(-/-)");
+        }
         $('.js_tandoku_big').html(String(bonus_rate.tandoku_big) + " 回");
-        $('.js_tandoku_big_rate').html("(1/" + String(bonus_rate.tandoku_big_rate) + ")");
+        if(bonus_rate.tandoku_big_rate > 0){
+            $('.js_tandoku_big_rate').html("(1/" + String(bonus_rate.tandoku_big_rate) + ")");
+        } else {
+            $('.js_tandoku_big_rate').html("(-/-)");
+        }
         $('.js_tandoku_reg').html(String(bonus_rate.tandoku_reg) + " 回");
-        $('.js_tandoku_reg_rate').html("(1/" + String(bonus_rate.tandoku_reg_rate) + ")");
+        if(bonus_rate.tandoku_reg_rate > 0){
+            $('.js_tandoku_reg_rate').html("(1/" + String(bonus_rate.tandoku_reg_rate) + ")");
+        } else {
+            $('.js_tandoku_reg_rate').html("(-/-)");
+        }
         $('.js_cherry_big').html(String(bonus_rate.cherry_big) + " 回");
-        $('.js_cherry_big_rate').html("(1/" + String(bonus_rate.cherry_big_rate) + ")");
+        if(bonus_rate.cherry_big_rate > 0){
+            $('.js_cherry_big_rate').html("(1/" + String(bonus_rate.cherry_big_rate) + ")");
+        } else {
+            $('.js_cherry_big_rate').html("(-/-)");
+        }
         $('.js_cherry_reg').html(String(bonus_rate.cherry_reg) + " 回");
-        $('.js_cherry_reg_rate').html("(1/" + String(bonus_rate.cherry_reg_rate) + ")");
+        if(bonus_rate.cherry_reg_rate > 0){
+            $('.js_cherry_reg_rate').html("(1/" + String(bonus_rate.cherry_reg_rate) + ")");
+        } else {
+            $('.js_cherry_reg_rate').html("(-/-)");
+        }
 
-        console.log(bonus_rate);
     }
 }
 

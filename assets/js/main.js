@@ -261,6 +261,7 @@ function bonus_rate_update(){
             $('.js_cherry_reg_rate').html("(-/-)");
         }
 
+        com_set_cookie('bonus_rate', JSON.stringify(bonus_rate));
     }
 }
 
@@ -268,11 +269,14 @@ function bonus_rate_update(){
 // DEBUG
 //
 function debug(){
-    bonus_rate_update();
-    let bonus_obj = JSON.parse($.cookie('bonus_data'));
-    alert(JSON.stringify(bonus_obj));
+    // bonus_rate_update();
+    let bonus_data = JSON.parse($.cookie('bonus_data'));
+    let bonus_rate = JSON.parse($.cookie('bonus_rate'));
+    console.log(bonus_data);
+    console.log(bonus_rate);
 }
 
 function cookie_del(){
     $.removeCookie('bonus_data', {path:'/'});
+    $.removeCookie('bonus_rate', {path:'/'});
 }

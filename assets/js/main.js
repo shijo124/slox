@@ -101,7 +101,9 @@ function update_bonus_chart(ctx,myChart){
                 ]
             },
         }
+
         myChart.data = update_chart_data.data;
+        myChart.width = 360;
         myChart.update();
 
     }

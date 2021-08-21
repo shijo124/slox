@@ -1,5 +1,8 @@
 'use strict';
 
+const CHART_DEFAULT = 120;
+const CHART_WIDTH_ADD = 40;
+
 const TANDOKU_BIG = 'tan_big';
 const TANDOKU_REG = 'tan_reg';
 const CHERRY_BIG = 'che_big';
@@ -63,7 +66,7 @@ function bonus_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind){
 //
 // update bonus chart
 //
-function update_bonus_chart(ctx,myChart){
+function update_bonus_chart(myChart){
 
     if (typeof $.cookie('bonus_data') !== 'undefined'){
         let bonus_data = JSON.parse(com_get_cookie('bonus_data'));
@@ -103,7 +106,8 @@ function update_bonus_chart(ctx,myChart){
         }
 
         myChart.data = update_chart_data.data;
-        myChart.width = 360;
+        myChart.width = CHART_DEFAULT + (bonus_data.length * CHART_WIDTH_ADD);
+        console.log(myChart.width);
         myChart.update();
 
     }

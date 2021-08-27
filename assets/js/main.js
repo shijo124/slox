@@ -126,6 +126,6 @@ function debug(){
 function cookie_del(){
     reset_bonus_data = [];
     reset_bonus_rate = {};
-    $.removeCookie('bonus_data', reset_bonus_data, {path:'/'});
-    $.removeCookie('bonus_rate', reset_bonus_rate, {path:'/'});
+    com_set_cookie('bonus_data', reset_bonus_data, {path:'/'});
+    com_set_cookie('bonus_rate', reset_bonus_rate, {path:'/'});
 }

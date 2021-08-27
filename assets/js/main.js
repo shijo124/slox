@@ -124,6 +124,8 @@ function debug(){
 }
 
 function cookie_del(){
-    $.cookie("bonus_data", "", {path:'/', expires: -1});
-    $.cookie("bonus_rate", "", {path:'/', expires: -1});
+    reset_bonus_data = [];
+    reset_bonus_rate = {};
+    $.removeCookie('bonus_data', reset_bonus_data, {path:'/'});
+    $.removeCookie('bonus_rate', reset_bonus_rate, {path:'/'});
 }

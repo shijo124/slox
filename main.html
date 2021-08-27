@@ -263,7 +263,7 @@
 
             $('.js_debug').on('click', function(){
                 cookie_del();
-                alert('cookieを削除しました。');
+                alert(JSON.parse($.cookie('bonus_data')));
             });
 
         </script>

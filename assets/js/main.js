@@ -128,4 +128,5 @@ function cookie_del(){
     let reset_bonus_rate = {};
     com_set_cookie('bonus_data', reset_bonus_data, {path:'/'});
     com_set_cookie('bonus_rate', reset_bonus_rate, {path:'/'});
+    location.reload();
 }

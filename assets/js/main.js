@@ -46,7 +46,7 @@ function bonus_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind){
     }
 
 
-    if (typeof $.cookie('bonus_data') !== 'undefined'){
+    if ((typeof $.cookie('bonus_data') !== 'undefined') && ($.cookie('bonus_data') !== '')){
         bonus_data = JSON.parse($.cookie('bonus_data'));
     }
     chart_json = {
@@ -55,12 +55,8 @@ function bonus_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind){
         "cherry_cnt":parseInt(cherry_cnt),
         "bonus_kind":bonus_kind,
     }
-    console.log(chart_json);
     bonus_data.unshift(chart_json);
-    console.log(bonus_data);
     com_set_cookie('bonus_data', JSON.stringify(bonus_data));
-    console.log(JSON.parse(com_get_cookie('bonus_data')));
-
 
     return true;
 
@@ -72,46 +68,47 @@ function bonus_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind){
 function update_bonus_chart(myChart){
 
     if (typeof $.cookie('bonus_data') !== 'undefined'){
-        let bonus_data = JSON.parse(com_get_cookie('bonus_data'));
+        if ($.cookie('bonus_data') !== ''){
+            let bonus_data = JSON.parse(com_get_cookie('bonus_data'));
 
-        let up_label = bonus_data.map(bd => bd.all_cnt);
-        let up_data = bonus_data.map(bd => bd.all_cnt);
-        let up_bonus_kind = bonus_data.map(bd => bd.bonus_kind);
+            let up_label = bonus_data.map(bd => bd.all_cnt);
+            let up_data = bonus_data.map(bd => bd.all_cnt);
+            let up_bonus_kind = bonus_data.map(bd => bd.bonus_kind);
 
-        // up_dataを100単位で整形(1000以上：1000、100以下：100、以外：当選回数/100 余りあり=切り上げ、余りなし=そのまま)
-        for(let i=0;i<up_data.length;i++){
-            if(parseInt(up_data[i]) >= 1000){
-                up_data[i] = 1000;
-            } else if(parseInt(up_data[i]) <= 100){
-                up_data[i] = 100;
-            } else {
-                if((parseInt(up_data[i]) % 100) !== 0){
-                    up_data[i] = (Math.trunc(parseInt(up_data[i]) / 100) + 1) * 100;
+            // up_dataを100単位で整形(1000以上：1000、100以下：100、以外：当選回数/100 余りあり=切り上げ、余りなし=そのまま)
+            for(let i=0;i<up_data.length;i++){
+                if(parseInt(up_data[i]) >= 1000){
+                    up_data[i] = 1000;
+                } else if(parseInt(up_data[i]) <= 100){
+                    up_data[i] = 100;
+                } else {
+                    if((parseInt(up_data[i]) % 100) !== 0){
+                        up_data[i] = (Math.trunc(parseInt(up_data[i]) / 100) + 1) * 100;
+                    }
                 }
             }
+
+            // ボーナス種類でグラフの色を変更
+            for(let i=0;i<up_bonus_kind.length;i++){
+                up_bonus_kind[i] = bonus_chart_color[up_bonus_kind[i]]
+            }
+
+            let update_chart_data = {
+                data: {
+                    labels: up_label,
+                    datasets: [
+                        {
+                            data: up_data,
+                            backgroundColor: up_bonus_kind,
+                        }
+                    ]
+                },
+            }
+
+            myChart.data = update_chart_data.data;
+            myChart.width = CHART_DEFAULT + (bonus_data.length * CHART_WIDTH_ADD);
+            myChart.update();
         }
-
-        // ボーナス種類でグラフの色を変更
-        for(let i=0;i<up_bonus_kind.length;i++){
-            up_bonus_kind[i] = bonus_chart_color[up_bonus_kind[i]]
-        }
-
-        let update_chart_data = {
-            data: {
-                labels: up_label,
-                datasets: [
-                    {
-                        data: up_data,
-                        backgroundColor: up_bonus_kind,
-                    }
-                ]
-            },
-        }
-
-        myChart.data = update_chart_data.data;
-        myChart.width = CHART_DEFAULT + (bonus_data.length * CHART_WIDTH_ADD);
-        myChart.update();
-
     }
 }
 
@@ -127,11 +124,7 @@ function debug(){
 }
 
 function cookie_del(){
-    $.removeCookie("bonus_data");
-    $.removeCookie("bonus_rate");
-    // let reset_bonus_data = [];
-    // let reset_bonus_rate = {};
-    // com_set_cookie('bonus_data', "reset_bonus_data", {path:'/'});
-    // com_set_cookie('bonus_rate', "reset_bonus_rate", {path:'/'});
+    com_set_cookie('bonus_data', "", {path:'/', expires: -1});
+    com_set_cookie('bonus_rate', "", {path:'/', expires: -1});
     location.reload();
 }

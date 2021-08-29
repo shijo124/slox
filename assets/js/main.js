@@ -122,8 +122,8 @@ function debug(){
     // bonus_rate_update();
     let bonus_data = JSON.parse($.cookie('bonus_data'));
     let bonus_rate = JSON.parse($.cookie('bonus_rate'));
-    console.log(bonus_data);
-    console.log(bonus_rate);
+    alert(bonus_data);
+    alert(bonus_rate);
 }
 
 function cookie_del(){

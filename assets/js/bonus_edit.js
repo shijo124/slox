@@ -76,7 +76,6 @@ function bonus_update(all_cnt,budo_cnt,cherry_cnt,bonus_kind,update_no){
     let bonus_data = [];
     let chart_json = {};
 
-
     if((all_cnt === "") || (validation_check(all_cnt,"dec") === false)){
         alert('当選ゲーム数には半角の数字をいれてください');
         return false;
@@ -99,7 +98,7 @@ function bonus_update(all_cnt,budo_cnt,cherry_cnt,bonus_kind,update_no){
     }
 
 
-    if (typeof $.cookie('bonus_data') !== 'undefined'){
+    if ((typeof $.cookie('bonus_data') !== 'undefined') && ($.cookie('bonus_data') !== '')){
         bonus_data = JSON.parse($.cookie('bonus_data'));
         chart_json = {
             "all_cnt":parseInt(all_cnt),

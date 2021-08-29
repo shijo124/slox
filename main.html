@@ -126,6 +126,7 @@
 
                 </div>
                 <button type="button" class="btn btn-primary mt-3 mb-3 w-100" data-bs-toggle="modal" data-bs-target="#bonus_modal">ボーナス登録</button>
+                <button type="button" class="btn btn-primary mt-3 mb-3 w-100 js_debug_show">デバッグ</button>
             </main>
 
             <footer class="mt-auto text-white-50">
@@ -257,6 +258,10 @@
 
             $('.js_debug').on('click', function(){
                 cookie_del();
+            });
+
+            $('.js_debug_show').on('click', function(){
+                cookie_debug();
             });
 
         </script>

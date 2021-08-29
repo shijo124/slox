@@ -34,60 +34,96 @@
 
             <main class="px-3">
                 <div class="">
-                    <div class="row text-end">
-                        <div class="col-6">
-                            <div class="text-center" style="background-color:rgba(8,0,22,1.0);">総回転数</div>
-                            <div class="js_total_cnt">0 回</div>
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="p-1 text-center" style="background-color:rgba(8,0,22,1.0);">総回転数</div>
                         </div>
-                        <div class="col-6">
-                            <div class="text-center" style="background-color:rgba(8,0,22,1.0);">合算</div>
-                            <div class="js_total_calc">(-/-)</div>
+                        <div class="col-7">
+                            <div class="p-1 text-start js_total_cnt">0 回</div>
                         </div>
                     </div>
-                    <div class="row text-end mt-3">
-                        <div class="col">
+
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="p-1 text-center" style="background-color:rgba(8,0,22,1.0);">合算</div>
+                        </div>
+                        <div class="col-7">
+                            <div class="p-1 text-start js_total_cnt">-/-</div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-5">
                             <div class="text-center" style="background-color:rgba(8,0,22,1.0);">BIG</div>
-                            <div class="js_total_big">0 回</div>
-                            <div class="js_total_big_rate">(-/-)</div>
                         </div>
-                        <div class="col">
+                        <div class="col-7">
+                            <div class="text-start js_total_big">0 回 (-/-)</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-5">
                             <div class="text-center" style="background-color:rgba(8,0,22,1.0);">REG</div>
-                            <div class="js_total_reg">0 回</div>
-                            <div class="js_total_reg_rate">(-/-)</div>
                         </div>
-                        <div class="col">
+                        <div class="col-7">
+                            <div class="text-start js_total_reg">0 回 (-/-)</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-5">
                             <div class="text-center" style="background-color:rgba(8,0,22,1.0);">ぶどう</div>
-                            <div class="js_total_budo">0 回</div>
-                            <div class="js_total_budo_rate">(-/-)</div>
                         </div>
-                        <div class="col">
+                        <div class="col-7">
+                            <div class="text-start js_total_budo">0 回 (-/-)</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-5">
                             <div class="text-center" style="background-color:rgba(8,0,22,1.0);">チェリ</div>
-                            <div class="js_total_cherry">0 回</div>
-                            <div class="js_total_cherry_rate">(-/-)</div>
+                        </div>
+                        <div class="col-7">
+                            <div class="text-start js_total_cherry">0 回 (-/-)</div>
                         </div>
                     </div>
-                    <div class="row text-end mt-3">
-                        <div class="col">
+
+                    <div class="row">
+                        <div class="col-5">
                             <div class="text-center" style="background-color:rgba(8,0,22,1.0);">単BIG</div>
-                            <div class="js_tandoku_big">0 回</div>
-                            <div class="js_tandoku_big_rate">(-/-)</div>
                         </div>
-                        <div class="col">
-                            <div class="text-center" style="background-color:rgba(8,0,22,1.0);">単REG</div>
-                            <div class="js_tandoku_reg">0 回</div>
-                            <div class="js_tandoku_reg_rate">(-/-)</div>
-                        </div>
-                        <div class="col">
-                            <div class="text-center" style="background-color:rgba(8,0,22,1.0);">ﾁｪBIG</div>
-                            <div class="js_cherry_big">0 回</div>
-                            <div class="js_cherry_big_rate">(-/-)</div>
-                        </div>
-                        <div class="col">
-                            <div class="text-center" style="background-color:rgba(8,0,22,1.0);">ﾁｪREG</div>
-                            <div class="js_cherry_reg">0 回</div>
-                            <div class="js_cherry_reg_rate">(-/-)</div>
+                        <div class="col-7">
+                            <div class="text-start js_tandoku_big">0 回 (-/-)</div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="text-center" style="background-color:rgba(8,0,22,1.0);">単REG</div>
+                        </div>
+                        <div class="col-7">
+                            <div class="text-start js_tandoku_reg_rate">0 回 (-/-)</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="text-center" style="background-color:rgba(8,0,22,1.0);">ﾁｪBIG</div>
+                        </div>
+                        <div class="col-7">
+                            <div class="text-start js_cherry_big_rate">0 回 (-/-)</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="text-center" style="background-color:rgba(8,0,22,1.0);">ﾁｪREG</div>
+                        </div>
+                        <div class="col-7">
+                            <div class="text-start js_cherry_reg">0 回 (-/-)</div>
+                        </div>
+                    </div>
+
                 </div>
                 <button type="button" class="btn btn-primary mt-3 mb-3 w-100" data-bs-toggle="modal" data-bs-target="#bonus_modal">ボーナス登録</button>
             </main>

@@ -16,13 +16,14 @@ const bonus_chart_color = {
 }
 
 //
-// bonus save
+// game save
 //
-function bonus_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind){
+function game_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind,event_kind){
 
     let bonus_data = [];
+    let temp_data = [];
+    let end_data = [];
     let chart_json = {};
-
 
     if((all_cnt === "") || (validation_check(all_cnt,"dec") === false)){
         alert('当選ゲーム数には半角の数字をいれてください');
@@ -45,18 +46,32 @@ function bonus_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind){
         cherry_cnt = 0
     }
 
-
-    if ((typeof $.cookie('bonus_data') !== 'undefined') && ($.cookie('bonus_data') !== '')){
-        bonus_data = JSON.parse($.cookie('bonus_data'));
-    }
     chart_json = {
         "all_cnt":parseInt(all_cnt),
         "budo_cnt":parseInt(budo_cnt),
         "cherry_cnt":parseInt(cherry_cnt),
         "bonus_kind":bonus_kind,
     }
-    bonus_data.unshift(chart_json);
-    com_set_cookie('bonus_data', JSON.stringify(bonus_data));
+
+    if(event_kind === event_bonus){
+        if ((typeof $.cookie('bonus_data') !== 'undefined') && ($.cookie('bonus_data') !== '')){
+            bonus_data = JSON.parse($.cookie('bonus_data'));
+        }
+        bonus_data.unshift(chart_json);
+        com_set_cookie('bonus_data', JSON.stringify(bonus_data));
+    } else if (event_kind === event_temp){
+        if ((typeof $.cookie('temp_data') !== 'undefined') && ($.cookie('temp_data') !== '')){
+            temp_data = JSON.parse($.cookie('temp_data'));
+        }
+        com_set_cookie('temp_data', JSON.stringify(chart_json));
+    } else if (event_kind === event_end){
+        if ((typeof $.cookie('end_data') !== 'undefined') && ($.cookie('end_data') !== '')){
+            end_data = JSON.parse($.cookie('end_data'));
+        }
+        com_set_cookie('end_data', JSON.stringify(chart_json));
+    } else {
+        return false;
+    }
 
     return true;
 
@@ -116,15 +131,16 @@ function update_bonus_chart(myChart){
 // DEBUG
 //
 function debug(){
-    // bonus_rate_update();
-    let bonus_data = JSON.parse($.cookie('bonus_data'));
-    let bonus_rate = JSON.parse($.cookie('bonus_rate'));
-    alert(bonus_data);
-    alert(bonus_rate);
+    console.log(JSON.parse($.cookie('bonus_data')));
+    console.log(JSON.parse($.cookie('temp_data')));
+    console.log(JSON.parse($.cookie('end_data')));
+    console.log(JSON.parse($.cookie('bonus_rate')));
 }
 
 function cookie_del(){
     com_set_cookie('bonus_data', "", {path:'/', expires: -1});
     com_set_cookie('bonus_rate', "", {path:'/', expires: -1});
+    com_set_cookie('temp_data', "", {path:'/', expires: -1});
+    com_set_cookie('end_data', "", {path:'/', expires: -1});
     location.reload();
 }

@@ -84,49 +84,6 @@
                 </div>
             </footer>
 
-            <!-- Modal -->
-            <div class="modal fade" id="bonus_modal" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content bg-dark">
-                        <div class="modal-body">
-                            <form class=".js_bonus_form">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text w-50">当選ゲーム数(必須)</span>
-                                    <input type="tel" class="form-control text-end" name="all_game_cnt" placeholder="" oninput="if(value.length>4)value=value.slice(0,4)" required autofocus>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text bg-success text-white w-50">累計ブドウ(任意)</span>
-                                    <input type="tel" class="form-control text-end" name="all_budo_cnt" placeholder="" oninput="if(value.length>5)value=value.slice(0,5)">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text bg-danger text-white w-50">累計チェリー(任意)</span>
-                                    <input type="tel" class="form-control text-end" name="all_cherry_cnt" placeholder="" oninput="if(value.length>5)value=value.slice(0,5)">
-                                </div>
-                            </form>
-                            <div class="row">
-                                <div class="col w-100">
-                                    <button type="button" class="btn btn-outline-danger w-100 js_bonus_btn" data-bonus-kind="tan_big">単独BIG</button>
-                                </div>
-                                <div class="col w-100">
-                                    <button type="button" class="btn btn-outline-success w-100 js_bonus_btn" data-bonus-kind="tan_reg">単独REG</button>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col w-100">
-                                    <button type="button" class="btn btn-outline-warning w-100 js_bonus_btn" data-bonus-kind="che_big">チェリー重複BIG</button>
-                                </div>
-                                <div class="col w-100">
-                                    <button type="button" class="btn btn-outline-info w-100 js_bonus_btn" data-bonus-kind="che_reg">チェリー重複REG</button>
-                                </div>
-                            </div>
-                            <div class="mt-3 text-end">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         <!-- js -->
@@ -141,11 +98,6 @@
         <script src="./assets/js/com.js"></script>
         <script src="./assets/js/main.js"></script>
         <script>
-
-            //---
-            var bonus_modal = new bootstrap.Modal(document.getElementById('bonus_modal'), {
-                keyboard: false
-            });
 
             //---
             var ctx = document.getElementById("js_bonus_chart").getContext('2d');
@@ -187,30 +139,6 @@
             $(window).on('load', function() {
                 bonus_rate_update();
                 update_bonus_chart(myChart);
-            });
-
-            $(".js_bonus_btn").on("click", function(){
-
-                let all_cnt = parseInt($('input[name="all_game_cnt"]').val());
-                let budo_cnt = parseInt($('input[name="all_budo_cnt"]').val());
-                let cherry_cnt = parseInt($('input[name="all_cherry_cnt"]').val());
-                let bonus_kind = $(this).attr("data-bonus-kind");
-
-                let ret_bonus_save = bonus_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind);
-
-                if(ret_bonus_save){
-                    $('input[name="all_game_cnt"]').val("");
-                    $('input[name="all_budo_cnt"]').val("");
-                    $('input[name="all_cherry_cnt"]').val("");
-                    bonus_rate_update();
-                    update_bonus_chart(myChart);
-                    bonus_modal.hide();
-                }
-
-            });
-
-            $('.js_debug').on('click', function(){
-                cookie_del();
             });
 
         </script>

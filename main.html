@@ -126,12 +126,12 @@
 
                 </div>
 
-                <div class="row mt-5">
+                <div class="row mt-3">
                     <div class="col">
-                        <button type="button" class="btn btn-outline-light bg-dark w-100" data-bs-toggle="modal" data-bs-target="#bonus_modal">途中経過</button>
+                        <button type="button" class="btn btn-outline-light bg-dark w-100" data-bs-toggle="modal" data-bs-target="#game_temp">途中経過</button>
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-outline-light bg-dark w-100" data-bs-toggle="modal" data-bs-target="#bonus_modal">終了</button>
+                        <button type="button" class="btn btn-outline-light bg-dark w-100" data-bs-toggle="modal" data-bs-target="#game_end">終了します</button>
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary mt-3 w-100 p-3" data-bs-toggle="modal" data-bs-target="#bonus_modal">ボーナス登録</button>
@@ -183,10 +183,14 @@
                 </div>
             </footer>
 
-            <!-- Modal -->
+            <!-- Modal bonus -->
             <div class="modal fade" id="bonus_modal" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content bg-dark">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">ボーナスのデータを登録してください</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+                        </div>
                         <div class="modal-body">
                             <form class=".js_bonus_form">
                                 <div class="input-group mb-3">
@@ -226,6 +230,78 @@
                 </div>
             </div>
 
+            <!-- Modal temp -->
+            <div class="modal fade" id="game_temp" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content bg-dark">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">途中のデータを登録してください</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class=".js_bonus_form">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text w-50">当選ゲーム数(必須)</span>
+                                    <input type="tel" class="form-control text-end" name="temp_game_cnt" placeholder="" oninput="if(value.length>4)value=value.slice(0,4)" required autofocus>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-success text-white w-50">累計ブドウ(任意)</span>
+                                    <input type="tel" class="form-control text-end" name="temp_budo_cnt" placeholder="" oninput="if(value.length>5)value=value.slice(0,5)">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-danger text-white w-50">累計チェリー(任意)</span>
+                                    <input type="tel" class="form-control text-end" name="temp_cherry_cnt" placeholder="" oninput="if(value.length>5)value=value.slice(0,5)">
+                                </div>
+                            </form>
+                            <div class="row">
+                                <div class="col w-100">
+                                    <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">キャンセル</button>
+                                </div>
+                                <div class="col w-100">
+                                    <button type="button" class="btn btn-outline-light bg-dark w-100 js_game_temp_btn" data-temp-kind="temp">登録</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal end -->
+            <div class="modal fade" id="game_end" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content bg-dark">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">最終データを登録してください</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class=".js_bonus_form">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text w-50">当選ゲーム数(必須)</span>
+                                    <input type="tel" class="form-control text-end" name="end_game_cnt" placeholder="" oninput="if(value.length>4)value=value.slice(0,4)" required autofocus>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-success text-white w-50">累計ブドウ(任意)</span>
+                                    <input type="tel" class="form-control text-end" name="end_budo_cnt" placeholder="" oninput="if(value.length>5)value=value.slice(0,5)">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-danger text-white w-50">累計チェリー(任意)</span>
+                                    <input type="tel" class="form-control text-end" name="end_cherry_cnt" placeholder="" oninput="if(value.length>5)value=value.slice(0,5)">
+                                </div>
+                            </form>
+                            <div class="row">
+                                <div class="col w-100">
+                                    <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">キャンセル</button>
+                                </div>
+                                <div class="col w-100">
+                                    <button type="button" class="btn btn-outline-light bg-dark w-100 js_game_end_btn" data-end-kind="end">登録</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- js -->
@@ -246,27 +322,70 @@
                 keyboard: false
             });
 
+            var temp_modal = new bootstrap.Modal(document.getElementById('game_temp'), {
+                keyboard: false
+            });
+
+            var end_modal = new bootstrap.Modal(document.getElementById('game_end'), {
+                keyboard: false
+            });
+
             $(window).on('load', function() {
                 bonus_rate_update();
             });
 
+            //
             $(".js_bonus_btn").on("click", function(){
-
                 let all_cnt = parseInt($('input[name="all_game_cnt"]').val());
                 let budo_cnt = parseInt($('input[name="all_budo_cnt"]').val());
                 let cherry_cnt = parseInt($('input[name="all_cherry_cnt"]').val());
                 let bonus_kind = $(this).attr("data-bonus-kind");
 
-                let ret_bonus_save = bonus_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind);
+                let ret_bonus_save = game_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind,event_bonus);
 
-                if(ret_bonus_save){
+                if(ret_bonus_save === true){
                     $('input[name="all_game_cnt"]').val("");
                     $('input[name="all_budo_cnt"]').val("");
                     $('input[name="all_cherry_cnt"]').val("");
                     bonus_rate_update();
                     bonus_modal.hide();
                 }
+            });
 
+            //
+            $(".js_game_temp_btn").on("click", function(){
+                let all_cnt = parseInt($('input[name="temp_game_cnt"]').val());
+                let budo_cnt = parseInt($('input[name="temp_budo_cnt"]').val());
+                let cherry_cnt = parseInt($('input[name="temp_cherry_cnt"]').val());
+                let bonus_kind = $(this).attr("data-temp-kind");
+
+                let ret_temp_save = game_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind,event_temp);
+
+                if(ret_temp_save === true){
+                    $('input[name="temp_game_cnt"]').val("");
+                    $('input[name="temp_budo_cnt"]').val("");
+                    $('input[name="temp_cherry_cnt"]').val("");
+                    bonus_rate_update();
+                    temp_modal.hide();
+                }
+            });
+
+            //
+            $(".js_game_end_btn").on("click", function(){
+                let all_cnt = parseInt($('input[name="end_game_cnt"]').val());
+                let budo_cnt = parseInt($('input[name="end_budo_cnt"]').val());
+                let cherry_cnt = parseInt($('input[name="end_cherry_cnt"]').val());
+                let bonus_kind = $(this).attr("data-end-kind");
+
+                let ret_end_save = game_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind,event_end);
+
+                if(ret_end_save === true){
+                    $('input[name="end_game_cnt"]').val("");
+                    $('input[name="end_budo_cnt"]').val("");
+                    $('input[name="end_cherry_cnt"]').val("");
+                    bonus_rate_update();
+                    end_modal.hide();
+                }
             });
 
             $('.js_debug').on('click', function(){

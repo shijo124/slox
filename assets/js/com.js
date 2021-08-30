@@ -3,6 +3,10 @@
 const COM_DOMAIN = 'shijo124.github.io';
 // const COM_DOMAIN = '192.168.56.108';
 
+const event_bonus = 1;
+const event_temp = 2;
+const event_end = 3;
+
 //
 // cookie set
 // return nothing

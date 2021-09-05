@@ -16,9 +16,6 @@
         <!-- bootstrap cdn -->
         <link rel="stylesheet" onload="window.hljscss = 1;" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
         <script>window.hljscss || document.write('<link rel="stylesheet" href="./assets/css/bootstrap.min.css" \/>');</script>
-        <!-- iquery cdn -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-        <script>window.jQuery || document.write('<script src="./assets/js/jquery.min.js"><\/script>');</script>
 
     </head>
 
@@ -38,16 +35,78 @@
 
             <main class="px-3">
                 <h3 class="h1">slox.fun</h3>
-                <p class="lead">パチスロのデータをもっと取得しよう</p>
-                <p class="lead">
-                    <a href="./main.html" class="btn btn-lg btn-success fw-bold">マイジャグラー4</a>
-                </p>
+                <p class="lead">パチスロをもっと楽しもう</p>
+                <button class="btn btn-lg btn-success fw-bold" data-bs-toggle="modal" data-bs-target="#start_trigger_modal">Sアイムジャグラー(6号機)</button>
             </main>
 
             <footer class="mt-auto text-white-50">
                 <p>powerd by a.s</p>
             </footer>
 
+            <!-- Modal start_trigger -->
+            <div class="modal fade" id="start_trigger_modal" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content bg-dark">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                <p>朝一から始める場合は何も入力せず、始めるボタンを押してください。</p>
+                                <p>途中から始める場合は現在の総回転数、BIG、REGを登録して始めるボタンを押してください</p>
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class=".js_bonus_form">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text w-50">総回転数(必須)</span>
+                                    <input type="tel" class="form-control text-end" name="start_game_cnt" placeholder="" oninput="if(value.length>4)value=value.slice(0,4)" required autofocus>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text w-50">BIG(必須)</span>
+                                    <input type="tel" class="form-control text-end" name="start_big_cnt" placeholder="" oninput="if(value.length>5)value=value.slice(0,5)">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text w-50">REG(必須)</span>
+                                    <input type="tel" class="form-control text-end" name="start_reg_cnt" placeholder="" oninput="if(value.length>5)value=value.slice(0,5)">
+                                </div>
+                            </form>
+                            <div class="row mt-3">
+                                <div class="col w-100">
+                                    <button type="button" class="btn btn-primary w-100 js_start_btn" data-start-kind="start">始める</button>
+                                </div>
+                                <div class="mt-3 text-end">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
+        <!-- js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+        <!-- iquery cdn -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+        <script>window.jQuery || document.write('<script src="./assets/js/jquery.min.js"><\/script>');</script>
+        <!-- iquery cookie cdn -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="./assets/js/com.js"></script>
+        <script src="./assets/js/index.js"></script>
+
+        <script>
+        //
+        $(".js_start_btn").on("click", function(){
+            let all_cnt = parseInt($('input[name="start_game_cnt"]').val());
+            let big_cnt = parseInt($('input[name="start_big_cnt"]').val());
+            let reg_cnt = parseInt($('input[name="start_reg_cnt"]').val());
+
+            let ret_temp_save = start_save(all_cnt,big_cnt,reg_cnt);
+
+            if(ret_temp_save === true){
+                location.href = "./main.html";
+            }
+        });
+        </script>
     </body>
 </html>

@@ -15,6 +15,45 @@ const bonus_chart_color = {
     "che_reg":"rgba(0,0,255,0.5)",
 }
 
+const chart_options = {
+    options: {
+        responsive: false,
+        title: {
+            display: true,
+            text: 'ボーナスグラフ',
+        },
+        scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'X axe name',
+                    fontColor:'#ffffff',
+                    fontSize:16
+                },
+                ticks: {
+                   fontColor: "white",
+                   fontSize: 16
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'X axe name',
+                    fontColor:'#ffffff',
+                    fontSize:16
+                },
+                ticks: {
+                   fontColor: "white",
+                   fontSize: 16
+                }
+            }],
+        }
+    }
+}
+
+
 //
 // game save
 //
@@ -25,8 +64,8 @@ function game_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind,event_kind){
     let end_data = [];
     let chart_json = {};
 
-    if((all_cnt === "") || (validation_check(all_cnt,"dec") === false)){
-        alert('当選ゲーム数には半角の数字をいれてください');
+    if((all_cnt <= 0) || (all_cnt === "") || (validation_check(all_cnt,"dec") === false)){
+        alert('当選ゲーム数には1以上の半角の数字をいれてください');
         return false;
     }
     if(!isNaN(budo_cnt)){
@@ -59,15 +98,18 @@ function game_save(all_cnt,budo_cnt,cherry_cnt,bonus_kind,event_kind){
         }
         bonus_data.unshift(chart_json);
         com_set_cookie('bonus_data', JSON.stringify(bonus_data));
+        // 途中データ、終了データ削除
+        com_set_cookie('temp_data', "", {path:'/', expires: -1});
+        com_set_cookie('end_data', "", {path:'/', expires: -1});
     } else if (event_kind === event_temp){
-        if ((typeof $.cookie('temp_data') !== 'undefined') && ($.cookie('temp_data') !== '')){
-            temp_data = JSON.parse($.cookie('temp_data'));
-        }
+        // if ((typeof $.cookie('temp_data') !== 'undefined') && ($.cookie('temp_data') !== '')){
+        //     temp_data = JSON.parse($.cookie('temp_data'));
+        // }
         com_set_cookie('temp_data', JSON.stringify(chart_json));
     } else if (event_kind === event_end){
-        if ((typeof $.cookie('end_data') !== 'undefined') && ($.cookie('end_data') !== '')){
-            end_data = JSON.parse($.cookie('end_data'));
-        }
+        // if ((typeof $.cookie('end_data') !== 'undefined') && ($.cookie('end_data') !== '')){
+        //     end_data = JSON.parse($.cookie('end_data'));
+        // }
         com_set_cookie('end_data', JSON.stringify(chart_json));
     } else {
         return false;
@@ -117,10 +159,10 @@ function update_bonus_chart(myChart){
                             backgroundColor: up_bonus_kind,
                         }
                     ]
-                },
+                }
             }
-
             myChart.data = update_chart_data.data;
+            myChart.options = chart_options.options;
             myChart.width = CHART_DEFAULT + (bonus_data.length * CHART_WIDTH_ADD);
             myChart.update();
         }
@@ -131,10 +173,31 @@ function update_bonus_chart(myChart){
 // DEBUG
 //
 function debug(){
-    console.log(JSON.parse($.cookie('bonus_data')));
-    console.log(JSON.parse($.cookie('temp_data')));
-    console.log(JSON.parse($.cookie('end_data')));
-    console.log(JSON.parse($.cookie('bonus_rate')));
+    if ((typeof $.cookie('bonus_data') !== 'undefined') && ($.cookie('bonus_data') !== '')){
+        console.log(JSON.parse($.cookie('bonus_data')));
+    } else {
+        console.log("bonus_data is nothing");
+    }
+    if ((typeof $.cookie('temp_data') !== 'undefined') && ($.cookie('temp_data') !== '')){
+        console.log(JSON.parse($.cookie('temp_data')));
+    } else {
+        console.log("temp_data is nothing");
+    }
+    if ((typeof $.cookie('end_data') !== 'undefined') && ($.cookie('end_data') !== '')){
+        console.log(JSON.parse($.cookie('end_data')));
+    } else {
+        console.log("end_data is nothing");
+    }
+    if ((typeof $.cookie('bonus_rate') !== 'undefined') && ($.cookie('bonus_rate') !== '')){
+        console.log(JSON.parse($.cookie('bonus_rate')));
+    } else {
+        console.log("bonus_rate is nothing");
+    }
+    if ((typeof $.cookie('start_data') !== 'undefined') && ($.cookie('start_data') !== '')){
+        console.log(JSON.parse($.cookie('start_data')));
+    } else {
+        console.log("start_data is nothing");
+    }
 }
 
 function cookie_del(){
@@ -142,5 +205,6 @@ function cookie_del(){
     com_set_cookie('bonus_rate', "", {path:'/', expires: -1});
     com_set_cookie('temp_data', "", {path:'/', expires: -1});
     com_set_cookie('end_data', "", {path:'/', expires: -1});
+    com_set_cookie('start_data', "", {path:'/', expires: -1});
     location.reload();
 }

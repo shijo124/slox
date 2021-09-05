@@ -1,7 +1,5 @@
 'use strict';
 
-const index_cnt = 9;
-
 const tandoku_big = [
     402.1,
     397.2,
@@ -83,6 +81,8 @@ const total_rate = [
     120.5,
 ];
 
+let index_cnt = 0;  //有効データ数
+
 //
 // guessing update
 //
@@ -93,6 +93,7 @@ function guessing_update(){
         let guess_cnt = 0;
 
         if(bonus_rate.tandoku_big_rate !== 0){
+            index_cnt += 1;
             let loop_cnt = 6;
             for(let i=1;i<=tandoku_big.length;i++){
                 if(tandoku_big[i] <= bonus_rate.tandoku_big_rate){
@@ -105,6 +106,7 @@ function guessing_update(){
         }
 
         if(bonus_rate.tandoku_reg_rate !== 0){
+            index_cnt += 1;
             let loop_cnt = 6;
             for(let i=1;i<=tandoku_reg.length;i++){
                 if(tandoku_reg[i] <= bonus_rate.tandoku_reg_rate){
@@ -117,6 +119,7 @@ function guessing_update(){
         }
 
         if(bonus_rate.cherry_big_rate !== 0){
+            index_cnt += 1;
             let loop_cnt = 6;
             for(let i=1;i<=cherry_big.length;i++){
                 if(cherry_big[i] <= bonus_rate.cherry_big_rate){
@@ -129,6 +132,7 @@ function guessing_update(){
         }
 
         if(bonus_rate.cherry_reg_rate !== 0){
+            index_cnt += 1;
             let loop_cnt = 6;
             for(let i=1;i<=cherry_reg.length;i++){
                 if(cherry_reg[i] <= bonus_rate.cherry_reg_rate){
@@ -141,6 +145,7 @@ function guessing_update(){
         }
 
         if(bonus_rate.total_big_rate !== 0){
+            index_cnt += 1;
             let loop_cnt = 6;
             for(let i=1;i<=big_rate.length;i++){
                 if(big_rate[i] <= bonus_rate.total_big_rate){
@@ -153,6 +158,7 @@ function guessing_update(){
         }
 
         if(bonus_rate.total_reg_rate !== 0){
+            index_cnt += 1;
             let loop_cnt = 6;
             for(let i=1;i<=reg_rate.length;i++){
                 if(reg_rate[i] <= bonus_rate.total_reg_rate){
@@ -165,6 +171,7 @@ function guessing_update(){
         }
 
         if(bonus_rate.total_budo_rate !== 0){
+            index_cnt += 1;
             let loop_cnt = 6;
             for(let i=1;i<=budo_rate.length;i++){
                 if(budo_rate[i] <= bonus_rate.total_budo_rate){
@@ -177,6 +184,7 @@ function guessing_update(){
         }
 
         if(bonus_rate.total_cherry_rate !== 0){
+            index_cnt += 1;
             let loop_cnt = 6;
             for(let i=1;i<=cherry_rate.length;i++){
                 if(cherry_rate[i] <= bonus_rate.total_cherry_rate){
@@ -189,6 +197,7 @@ function guessing_update(){
         }
 
         if(bonus_rate.total_calc !== 0){
+            index_cnt += 1;
             let loop_cnt = 6;
             for(let i=1;i<=total_rate.length;i++){
                 if(total_rate[i] <= bonus_rate.total_calc){

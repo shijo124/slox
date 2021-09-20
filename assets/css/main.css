@@ -13,6 +13,11 @@ footer {
     color: rgba(250,247,255,1.0);
 }
 
+a {
+    text-decoration: none;
+    color: rgba(250,247,255,1.0);
+}
+
 .evt_btn {
     background-color: rgba(0,159,255,1.0);
     color: rgba(250,247,255,1.0);
@@ -23,4 +28,8 @@ footer {
     background-color: rgba(199,130,0,1.0);
     color: rgba(250,247,255,1.0);
     font-size: large;
+}
+
+.footer_icon {
+    font-size: 1.8rem;
 }

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <title>It's okay to be angry</title>
+        <style>
+            body {
+                background-color: rgba(59,17,5,1.0);
+                color: rgba(2255,255,255,1.0);
+            }
+            .modal-content.no_bg {
+                background-color: initial;
+                border: initial;
+                border-radius: initial;
+            }
+        </style>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body>
+        <header class="sticky-top">
+            <div class="h3 p-3">bye-bye irritate</div>
+        </header>
+        <main class="container">
+            <h1 class="text-center mt-3">It's okay to be angry.<br>Let's write down anger.</h1>
+            <form class="mt-3">
+                <textarea class="form-control js_input_irritate" name="input_irritate" rows="15"></textarea>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="d-flex justify-content-center m-4 btn btn-warning w-75 js_erase_irritate">
+                        <i class="material-icons pe-3">waving_hand</i>
+                        good riddance!
+                    </button>
+                </div>
+            </form>
+        </main>
+        <footer class="fixed-bottom pt-1 pb-1 text-center">
+            <div>© batton 2021</div>
+        </footer>
+
+        <!-- modal -->
+        <div class="modal fade" id="load_waning_modal" tabindex="-1" aria-labelledby="loadWarning" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content no_bg text-center h3">
+                    The data<br>you enter will not be saved.
+                    <div class="mt-4">
+                        <button type="button" class="btn btn-outline-light w-75" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script>
+            var lw_modal = new bootstrap.Modal(document.getElementById('load_waning_modal'), {
+                keyboard: false
+            });
+
+            lw_modal.show();
+
+            $(".js_erase_irritate").on("click", function(){
+                $(".js_input_irritate").val("");
+            });
+
+        </script>
+    </body>
+</html>

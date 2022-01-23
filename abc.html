@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shijo make</title>
+</head>
+<body>
+    <p>Calc</p>
+    <input type="text" id="js_calc_1" size="10">
+    <select id="js_calc_enz">
+        <option value="1" selected>+</option>
+        <option value="2">-</option>
+        <option value="3">×</option>
+        <option value="4">÷</option>
+    </select>
+    <input type="text" id="js_calc_2" size="10">
+    <input type="button" id="js_calc_equ" value="計算" onclick="js_calc(); return true;">
+    <div id="js_calc_ans"></div>
+
+    <p>Calc</p>
+    <div id="react_calc"></div>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="test.js"></script>
+</body>
+</html>
